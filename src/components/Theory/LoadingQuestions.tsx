@@ -9,7 +9,6 @@ const LoadingQuestions = ({ exam_type }: { exam_type: string }) => {
           Przygotowywanie testu...
         </h1>
         <p className="text-lg text-muted-foreground">
-          {/* Losujemy 40 pytań z kwalifikacji {exam_type.toUpperCase()} */}
           Losujemy 40 pytań z kwalifikacji {exam_type.toUpperCase()}
         </p>
       </div>

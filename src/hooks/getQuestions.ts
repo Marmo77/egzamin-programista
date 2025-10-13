@@ -1,4 +1,5 @@
-import supabase, { supabaseBucketKey } from "../utils/supabase";
+import type { QuestionType } from "@/types/types";
+import supabase from "../utils/supabase";
 
 //```
 //
@@ -20,20 +21,17 @@ export const getRandomQuestions = async (
   }
   const shuffled = data?.sort(() => Math.random() - 0.5);
   const limited = shuffled?.slice(0, limit);
-  return limited;
-  // return data;
+
+  // tworzymy nowy obiekt (imageUrl?: string | null), jeśli istnieje image to tworzymy link do tego obrazu
+  const questionsWithUrls = limited?.map((question) => ({
+    ...question,
+    imageUrl: question?.image ? getQuestionImageUrl(question.image) : null,
+  }));
+
+  return questionsWithUrls;
 };
 
-// export const getQuestionImage = async (questionNumber: number) => {
-//   const { data, error } = await supabase.storage
-//     .from("questions_images")
-//     .info(supabaseBucketKey);
-//   if (error) {
-//     console.log(error);
-//   }
-//   return data;
-// };
-
+// Pobieramy link do obrazu z Supabase Storage
 export const getQuestionImageUrl = (
   filename: string | null | undefined
 ): string | null => {
@@ -47,4 +45,24 @@ export const getQuestionImageUrl = (
   // console.log(data.publicUrl);
   return data.publicUrl;
 };
+
+// Preloadujemy obrazy
+export const preloadQuestionImages = async (questions: QuestionType[]) => {
+  // bierze 40 losowych pytań wylosowanych, i filtrujemy tylko te które mają obraz
+  const imagePromises = questions
+    .filter((q) => q.imageUrl)
+    .map((q) => {
+      return new Promise<void>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => {
+          console.error("Failed to preload image:", q.imageUrl);
+          reject();
+        };
+        img.src = q.imageUrl!;
+      });
+    });
+  await Promise.all(imagePromises);
+};
+
 // https://zawodowe.edu.pl/technik-informatyk/INF.03/ scrape to database

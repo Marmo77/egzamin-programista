@@ -3,8 +3,6 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import QuestionReport from "./QuestionReport";
 import type { QuestionType } from "@/types/types";
-import { useEffect, useState } from "react";
-import { getQuestionImageUrl } from "@/hooks/getQuestions";
 
 const QuestionCard = ({
   question,
@@ -21,8 +19,10 @@ const QuestionCard = ({
     onSelect(answer);
   };
   const currentQuestion = question[questionNumber - 1];
-  const hasImage =
-    currentQuestion?.image && currentQuestion.image.trim() !== "";
+
+  // preload image
+  const imageUrl = currentQuestion?.imageUrl;
+  const hasImage = !!imageUrl;
 
   const AnswersButtons = [
     {
@@ -42,7 +42,6 @@ const QuestionCard = ({
       answer: currentQuestion?.answer_d,
     },
   ];
-  const imageUrl = getQuestionImageUrl(currentQuestion?.image);
 
   return (
     <Card className="px-3">
@@ -79,7 +78,7 @@ const QuestionCard = ({
               alt={`obraz ${questionNumber}`}
               className="w-[600px] h-auto"
               loading="lazy"
-              src={imageUrl ?? ""}
+              src={imageUrl}
             />
           </div>
         )}
