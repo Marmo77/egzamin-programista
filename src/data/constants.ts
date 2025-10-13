@@ -6,8 +6,13 @@ export const AppConstants = {
   },
   Website: {
     Title: "Egzamin Programista",
-    link: "egzaminprogramista.pl",
-    github: "https://github.com/Marmo77/egzaminprogramista",
+    link: "https://egzamin-programista.vercel.app",
+    github: "https://github.com/Marmo77/egzamin-programista",
+    // -----------------------------------------------
+    // Later ? \/
+    // Title: "Egzamin Programista",
+    // link: "egzaminprogramista.pl",
+    // github: "https://github.com/Marmo77/egzaminprogramista",
     version: "1.0",
   },
 

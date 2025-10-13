@@ -107,7 +107,7 @@ const QuestionReport = ({
         </Button>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader className="p-4 px-8">
+        <SheetHeader className="p-4 px-8 max-sm:p-3">
           <SheetTitle className="flex items-center gap-2 justify-center">
             <FlagTriangleRight className="w-5 h-5 text-destructive" />
             Zgłoś pytanie
@@ -117,9 +117,9 @@ const QuestionReport = ({
             stronę!
           </SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-6 px-6">
+        <div className="flex flex-col gap-6 px-6 max-sm:gap-2 max-sm:px-3">
           {/* Question informations */}
-          <div className="rounded-lg px-2 mt-4 space-y-3">
+          <div className="rounded-lg px-2 mt-4 space-y-2 max-sm:space-y-1">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <BookOpen className="w-4 h-4" />
               <span>
@@ -164,7 +164,7 @@ const QuestionReport = ({
                   value={report.description}
                   onChange={(e) => handleTextArea(e)}
                   placeholder="Opisz szczegółowo problem, który zauważyłeś..."
-                  className="mt-1 w-full max-h-[300px]"
+                  className="mt-1 w-full max-h-[300px] placeholder:text-sm"
                 />
                 <span className="text-xs text-muted-foreground px-1">
                   {report.description.length}/500 znaków
@@ -203,7 +203,7 @@ const QuestionReport = ({
           </form>
 
           {/* Benefits from report */}
-          <div className="bg-blue-50 mx-4 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+          <div className="bg-blue-50 mx-4 max-sm:mx-1 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg p-2">
             <div className="flex gap-3">
               <MessageSquare className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
               <div className="text-xs text-blue-700 dark:text-blue-300">

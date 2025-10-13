@@ -10,8 +10,9 @@ import { Button } from "./ui/button";
 import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
-import { memo, useState, useEffect, lazy, Suspense } from "react";
-
+import { memo, lazy } from "react";
+// import { redirectInWorkonClick } from "@/hooks/redirectInWork";
+// Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
   import("@/components/ui/avatar").then((m) => ({ default: m.Avatar }))
@@ -29,14 +30,14 @@ const Theory = () => {
     navigate("/");
   };
 
-  const [showCredits, setShowCredits] = useState(false);
+  // const [showCredits, setShowCredits] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCredits(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowCredits(true);
+  //   }, 100);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">

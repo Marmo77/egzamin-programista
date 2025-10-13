@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
     <ErrorBoundary>
       <BrowserRouter>
         <Toaster duration={3000} position="top-right" richColors={true} />{" "}
-        {/* https://sonner.emilkowal.ski/ */}
+        {/*Toaster: https://sonner.emilkowal.ski/ */}
         <App />
       </BrowserRouter>
     </ErrorBoundary>

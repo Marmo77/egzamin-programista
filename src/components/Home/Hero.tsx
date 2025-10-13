@@ -149,6 +149,7 @@ const HeroProsCards = () => {
           description={card.description}
           icon={card.icon}
           colors={card.colors}
+          key={card.title}
         />
       ))}
     </div>
