@@ -4,17 +4,8 @@ import { getFilteredExams } from "@/hooks/getExams";
 import type { ExamType } from "@/types/types";
 import PracticeCard from "./Practice/PracticeCard";
 import PracticeFilters from "./Practice/PracticeFilters";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "./ui/breadcrumb";
-import { Link } from "react-router-dom";
-import { AppConstants } from "@/data/constants";
-import { Home } from "lucide-react";
+
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
 import PaginationPractice from "./Practice/Pagination";
@@ -104,6 +95,12 @@ const Practice = () => {
     },
     [totalCount, limit]
   );
+
+  // Redirect to work in progress
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/work-in-progress");
+  }, []);
 
   return (
     <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8">

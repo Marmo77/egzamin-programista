@@ -129,6 +129,7 @@ const PracticeCard = React.memo(({ exam }: { exam: ExamType }) => {
             {exam.technologies?.map((tech) => (
               <Badge
                 variant={"technology"}
+                key={tech}
                 className={
                   tech == "JavaScript"
                     ? Technologies[0].JavaScript.text +
