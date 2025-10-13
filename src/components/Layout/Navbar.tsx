@@ -67,8 +67,12 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const handleOpenMobileMenu = () => {
+    setMobileMenuOpen(true);
+  };
+  const handleCloseMobileMenu = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -111,7 +115,7 @@ export default function Navbar() {
             {/* Backdrop - positioned below navbar but above page content */}
             <div
               className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 mt-16"
-              onClick={handleMobileMenu}
+              onClick={handleCloseMobileMenu}
             />
 
             {/* Mobile Menu - positioned below navbar */}
@@ -122,7 +126,7 @@ export default function Navbar() {
                   <Link
                     to={AppConstants.Navigation.Theory}
                     className="flex items-center justify-between text-lg font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-3 border-b border-gray-100 dark:border-gray-800"
-                    onClick={handleMobileMenu}
+                    onClick={handleCloseMobileMenu}
                   >
                     <span>Teoria</span>
                     <div className="w-2 h-2 bg-blue-600 rounded-full" />
@@ -131,7 +135,7 @@ export default function Navbar() {
                   <Link
                     to={AppConstants.Navigation.Practice}
                     className="flex items-center justify-between text-lg font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-3 border-b border-gray-100 dark:border-gray-800"
-                    onClick={handleMobileMenu}
+                    onClick={handleCloseMobileMenu}
                   >
                     <span>Praktyka</span>
                     <div className="w-2 h-2 bg-green-500 rounded-full" />
@@ -146,7 +150,7 @@ export default function Navbar() {
                     size="lg"
                     onClick={() => {
                       toggleTheme();
-                      handleMobileMenu();
+                      handleCloseMobileMenu();
                     }}
                     className="w-full justify-between py-6 text-base min-sm:hidden font-medium bg-background/50 backdrop-blur-sm"
                   >
@@ -162,7 +166,7 @@ export default function Navbar() {
                   <Link
                     to={AppConstants.Navigation.Theory}
                     className="block"
-                    onClick={handleMobileMenu}
+                    onClick={handleCloseMobileMenu}
                   >
                     <Button
                       size="lg"
@@ -219,7 +223,9 @@ export default function Navbar() {
             variant="ghost"
             size="sm"
             className="md:hidden"
-            onClick={handleMobileMenu}
+            onClick={
+              mobileMenuOpen ? handleCloseMobileMenu : handleOpenMobileMenu
+            }
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? (
