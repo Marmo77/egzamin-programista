@@ -9,6 +9,7 @@ export type QuestionType = {
   answer_d: string;
   explanation?: string;
   image?: string;
+  imageUrl?: string | null;
 };
 
 export type ExamType = {

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import QuestionCard from "./QuestionCard";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { getRandomQuestions } from "@/hooks/getQuestions";
+import {
+  getRandomQuestions,
+  preloadQuestionImages,
+} from "@/hooks/getQuestions";
 import type { QuestionType } from "@/types/types";
 import { Button } from "../ui/button";
 import { QuestionResults } from "@/hooks/QuestionResults";
@@ -33,6 +36,7 @@ const Question = () => {
   // const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // będzie używane gdy dodamy inne tryby (jeśli true -> gramy dalej, false -> koniec gry)
 
   // Timer
+
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 * 60 = 3600 sekund = 1 godzina
 
   const navigate = useNavigate();
@@ -43,29 +47,39 @@ const Question = () => {
 
   // asnwered count
   const answeredCount = answers.filter((answer) => answer !== null).length;
-
   useEffect(() => {
-    // console.log("typ pytań: ", type);
-    getRandomQuestions(exam_type, 40)
-      .then((res) => {
-        // Pobieranie X pytań z Bazy Danych
-        const q = res as QuestionType[];
-        setQuestion(q);
-        setAnswers(Array(q.length).fill(null)); // tworzy tablice o długości q.length i wypełnia ją nullami (jeśli nie zaznaczono odpowiedzi to jest null)
+    const loadQuestionsAndImages = async () => {
+      try {
+        setIsLoading(true);
+
+        // Pobieranie pytań z bazy danych
+        const questions = await getRandomQuestions(exam_type, 40);
+
+        if (!questions || question.length) {
+          setQuestion([]);
+          setIsLoading(false);
+          return;
+        }
+
+        // Preloadowanie zdjęć
+
+        await preloadQuestionImages(questions);
+
+        setQuestion(questions);
+        setAnswers(Array(questions.length).fill(null)); // tworzy tablice o długości q.length i wypełnia ją nullami (jeśli nie zaznaczono odpowiedzi to jest null)
         setCurrentQuestion(1); //Wczytuje na start od pierwszego pytania
         setSelectedAnswer(null); //Resetuje zaznaczoną odpowiedź
-        // setIsCorrect(null); //Resetuje poprawność odpowiedzi
-      })
-      .catch((e) => {
-        console.error("Failed to load questions", e);
-      })
-      .finally(() => {
-        // setTimeout(() => {
+      } catch (e) {
+        console.error("Failed to load questions or images:", e);
+        setQuestion([]);
+      } finally {
         setIsLoading(false);
-        // }, 1000);
-      });
-    // console.log("load", isLoading);
+      }
+    };
+
+    loadQuestionsAndImages();
   }, [exam_type]);
+
   const handleNextQuestion = () => {
     // Przechodzi do następnego pytania
     const next = Math.min(currentQuestion + 1, question.length || 1); // Sprawdza czy nie wyjdzie poza zakres
