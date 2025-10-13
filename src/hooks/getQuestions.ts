@@ -44,6 +44,7 @@ export const getQuestionImageUrl = (
     .from("questions_images")
     .getPublicUrl(filename);
 
+  // console.log(data.publicUrl);
   return data.publicUrl;
 };
 // https://zawodowe.edu.pl/technik-informatyk/INF.03/ scrape to database

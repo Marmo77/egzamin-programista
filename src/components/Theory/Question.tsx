@@ -44,7 +44,6 @@ const Question = () => {
 
   // asnwered count
   const answeredCount = answers.filter((answer) => answer !== null).length;
-
   useEffect(() => {
     // console.log("typ pytań: ", type);
     getRandomQuestions(exam_type, 40)
