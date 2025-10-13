@@ -17,7 +17,8 @@ export const getRandomQuestions = async (
     .select("*")
     .eq("subject", subject);
   if (error) {
-    console.log(error);
+    console.error("Failed to load questions:", error);
+    return [];
   }
   const shuffled = data?.sort(() => Math.random() - 0.5);
   const limited = shuffled?.slice(0, limit);
@@ -42,7 +43,6 @@ export const getQuestionImageUrl = (
     .from("questions_images")
     .getPublicUrl(filename);
 
-  // console.log(data.publicUrl);
   return data.publicUrl;
 };
 

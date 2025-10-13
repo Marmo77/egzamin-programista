@@ -1,13 +1,10 @@
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { Badge } from "../ui/badge";
-import { GraduationCap, Lightbulb } from "lucide-react";
-import { Card } from "../ui/card";
+import { Lightbulb } from "lucide-react";
 
 type FaqType = {
   question: string;
@@ -73,6 +70,8 @@ const Faq = () => {
           Masz pytania? Sprawdź czy nie ma już odpowiedzi tutaj!
         </p>
       </div>
+      <div className="flex flex-col gap-2"></div>
+
       <Accordion type="single" collapsible className="space-y-4">
         {FaqQuestions.map((faq, index) => (
           <AccordionItem
