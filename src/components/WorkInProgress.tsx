@@ -65,8 +65,15 @@ const WorkInProgress = () => {
         </CardContent>
       </Card>
       {/* Note */}
-      <p className="text-sm text-center text-gray-500 mt-6">
-        W razie pytań skontaktuj się z nami przez GitHub
+      <p className="text-sm text-center text-foreground/60 mt-6">
+        W razie pytań skontaktuj się z nami przez{" "}
+        <a
+          href="https://github.com/Marmo77"
+          target="_blank"
+          className="text-primary underline"
+        >
+          GitHub
+        </a>
       </p>
     </section>
   );

@@ -5,9 +5,14 @@ export const AppConstants = {
     avatar: "https://github.com/Marmo77.png",
   },
   Website: {
-    Title: "Egzamin Programista",
-    link: "egzaminprogramista.pl",
-    github: "https://github.com/Marmo77/egzaminprogramista",
+    Title: "Passtheexams",
+    link: "passtheexams.pl",
+    github: "https://github.com/Marmo77/passtheexams",
+    // -----------------------------------------------
+    // Later ? \/
+    // Title: "Egzamin Programista",
+    // link: "egzaminprogramista.pl",
+    // github: "https://github.com/Marmo77/egzaminprogramista",
     version: "1.0",
   },
 

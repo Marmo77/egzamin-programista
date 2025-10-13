@@ -10,8 +10,8 @@ import { Button } from "./ui/button";
 import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
-import { memo, useState, useEffect, lazy, Suspense } from "react";
-
+import { memo, useState, useEffect, lazy } from "react";
+// Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
   import("@/components/ui/avatar").then((m) => ({ default: m.Avatar }))
@@ -61,6 +61,7 @@ const Theory = () => {
         <ExamCard
           title="INF.04"
           subject="inf04"
+          inWork
           badges={["C++", "Python", "Algorytmy", "Struktury danych"]}
           description="Projektowanie i programowanie aplikacji desktopowych i mobilnych"
           Icon={Database}
@@ -91,6 +92,7 @@ const ExamCard = memo(
     description,
     Icon,
     icon_color,
+    inWork,
   }: {
     subject: string;
     title: string;
@@ -98,6 +100,7 @@ const ExamCard = memo(
     description: string;
     Icon?: React.ElementType;
     icon_color?: string;
+    inWork?: boolean;
   }) => {
     const navigate = useNavigate();
 
@@ -108,7 +111,13 @@ const ExamCard = memo(
     return (
       <Card
         className="cursor-pointer hover:shadow-lg transition-all duration-200 border-2 hover:border-primary/20"
-        onClick={() => handleSubjectSelect(subject)}
+        {...(inWork
+          ? {
+              onClick: () => {
+                navigate("/work-in-progress");
+              },
+            }
+          : { onClick: () => handleSubjectSelect(subject) })}
       >
         <CardHeader className="text-center pb-4">
           <div

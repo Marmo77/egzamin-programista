@@ -1,4 +1,3 @@
-import React, { lazy } from "react";
 import { Mail, Github } from "lucide-react";
 import { AppConstants } from "@/data/constants";
 import { Button } from "../ui/button";
@@ -23,19 +22,7 @@ const Footer = () => {
                     {AppConstants.Website.link}
                   </a>
                   . Wszystkie prawa zastrzeżone.
-                  {/* by{" "} */}
                 </span>
-                {/* by Credits */}
-                {/* <Button
-                  variant="link"
-                  onClick={() =>
-                    window.open(AppConstants.Credits.link, "_blank")
-                  }
-                  className="rounded-3xl -ml-2.5"
-                  aria-label="GitHub"
-                >
-                  {AppConstants.Credits.name}
-                </Button> */}
               </div>
             </div>
           </div>
