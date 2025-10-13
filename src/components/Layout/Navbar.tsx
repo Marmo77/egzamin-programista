@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
-import { GraduationCap, Moon, Sun } from "lucide-react";
+import { GraduationCap, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -65,11 +65,17 @@ export default function Navbar() {
     themeChangeNotification(newTheme);
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex justify-center">
-      <div className="flex h-16 w-6xl items-center justify-between">
+      <div className="flex h-16 w-6xl items-center justify-between max-lg:px-6 z-50">
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 z-50">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <GraduationCap className="w-5 h-5 text-white" />
           </div>
@@ -84,7 +90,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-6 z-50">
           <Link
             to={AppConstants.Navigation.Theory}
             className="text-primary/85 hover:text-primary transition-colors font-medium"
@@ -98,6 +104,88 @@ export default function Navbar() {
             Praktyka
           </Link>
         </nav>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop - positioned below navbar but above page content */}
+            <div
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 mt-16"
+              onClick={handleMobileMenu}
+            />
+
+            {/* Mobile Menu - positioned below navbar */}
+            <nav className="fixed top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/90 border-b border-gray-200 dark:border-gray-700 shadow-2xl animate-in slide-in-from-top-8 duration-300">
+              <div className="px-6 py-8 space-y-8">
+                {/* Navigation Links */}
+                <div className="space-y-6">
+                  <Link
+                    to={AppConstants.Navigation.Theory}
+                    className="flex items-center justify-between text-lg font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-3 border-b border-gray-100 dark:border-gray-800"
+                    onClick={handleMobileMenu}
+                  >
+                    <span>Teoria</span>
+                    <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                  </Link>
+
+                  <Link
+                    to={AppConstants.Navigation.Practice}
+                    className="flex items-center justify-between text-lg font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-3 border-b border-gray-100 dark:border-gray-800"
+                    onClick={handleMobileMenu}
+                  >
+                    <span>Praktyka</span>
+                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  </Link>
+                </div>
+
+                {/* Mobile Actions */}
+                <div className="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+                  {/* Theme Toggle for Mobile */}
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => {
+                      toggleTheme();
+                      handleMobileMenu();
+                    }}
+                    className="w-full justify-between py-6 text-base min-sm:hidden font-medium bg-background/50 backdrop-blur-sm"
+                  >
+                    <span>Zmień motyw</span>
+                    {theme === "light" ? (
+                      <Moon className="h-5 w-5" />
+                    ) : (
+                      <Sun className="h-5 w-5" />
+                    )}
+                  </Button>
+
+                  {/* CTA Button for Mobile */}
+                  <Link
+                    to={AppConstants.Navigation.Theory}
+                    className="block"
+                    onClick={handleMobileMenu}
+                  >
+                    <Button
+                      size="lg"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-base font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+                    >
+                      Rozpocznij test
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Version Info */}
+                <div className="text-center pt-4">
+                  <Badge
+                    variant="outline"
+                    className="text-xs bg-background/50 backdrop-blur-sm"
+                  >
+                    v{AppConstants.Website.version}
+                  </Badge>
+                </div>
+              </div>
+            </nav>
+          </>
+        )}
 
         {/* Right side buttons */}
         <div className="flex items-center gap-2">
@@ -119,7 +207,7 @@ export default function Navbar() {
           {/* CTA Button */}
           <Link
             to={AppConstants.Navigation.Theory}
-            className="flex items-center"
+            className="flex items-center max-sm:hidden"
           >
             <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105">
               Rozpocznij test
@@ -127,19 +215,18 @@ export default function Navbar() {
           </Link>
 
           {/* Mobile menu button */}
-          <Button variant="ghost" size="sm" className="md:hidden">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
-                fill="currentColor"
-              />
-            </svg>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={handleMobileMenu}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </Button>
         </div>
       </div>

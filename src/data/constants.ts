@@ -5,9 +5,9 @@ export const AppConstants = {
     avatar: "https://github.com/Marmo77.png",
   },
   Website: {
-    Title: "Passtheexams",
-    link: "passtheexams.pl",
-    github: "https://github.com/Marmo77/passtheexams",
+    Title: "Egzamin Programista",
+    link: "https://egzamin-programista.vercel.app",
+    github: "https://github.com/Marmo77/egzamin-programista",
     // -----------------------------------------------
     // Later ? \/
     // Title: "Egzamin Programista",
