@@ -1,4 +1,4 @@
-import supabase from "../utils/supabase";
+import supabase, { supabaseBucketKey } from "../utils/supabase";
 
 //```
 //
@@ -24,4 +24,26 @@ export const getRandomQuestions = async (
   // return data;
 };
 
+// export const getQuestionImage = async (questionNumber: number) => {
+//   const { data, error } = await supabase.storage
+//     .from("questions_images")
+//     .info(supabaseBucketKey);
+//   if (error) {
+//     console.log(error);
+//   }
+//   return data;
+// };
+
+export const getQuestionImageUrl = (
+  filename: string | null | undefined
+): string | null => {
+  if (!filename) return null;
+
+  // Get public URL from Supabase Storage
+  const { data } = supabase.storage
+    .from("questions_images")
+    .getPublicUrl(filename);
+
+  return data.publicUrl;
+};
 // https://zawodowe.edu.pl/technik-informatyk/INF.03/ scrape to database

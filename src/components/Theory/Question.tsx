@@ -33,6 +33,7 @@ const Question = () => {
   // const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // będzie używane gdy dodamy inne tryby (jeśli true -> gramy dalej, false -> koniec gry)
 
   // Timer
+
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 * 60 = 3600 sekund = 1 godzina
 
   const navigate = useNavigate();
