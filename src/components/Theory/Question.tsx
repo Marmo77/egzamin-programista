@@ -9,7 +9,7 @@ import type { QuestionType } from "@/types/types";
 import { Button } from "../ui/button";
 import { QuestionResults } from "@/hooks/QuestionResults";
 import { useNavigate, useParams } from "react-router-dom";
-import LoadingQuestions from "./LoadingQuestions";
+import LoadingQuestions from "./LoadingSkeletons";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import NoQuestions from "./NoQuestions";
 import ProgressNavigation from "./ProgressNavigation";
