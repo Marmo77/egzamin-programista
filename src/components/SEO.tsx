@@ -8,7 +8,7 @@ type SEOProps = {
   url?: string;
   type?: string;
 };
-import ogImage from "../assets/imgs/ogimage.png";
+import ogImage from "../assets/imgs/ogimage.jpg";
 const SEO = ({
   title = "Egzamin Programista - Testy INF.03 & INF.04 za Darmo",
   description = "Przygotuj się do egzaminów zawodowych INF.03 i INF.04 z darmowymi testami teoretycznymi i arkuszami praktycznymi. Pytania z oficjalnej bazy CKE!",

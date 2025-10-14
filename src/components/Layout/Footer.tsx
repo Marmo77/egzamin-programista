@@ -19,7 +19,11 @@ const Footer = () => {
                     className="hover:text-primary text-primary/85"
                     target="_blank"
                   >
-                    {AppConstants.Website.link}
+                    {
+                      AppConstants.Website.link
+                        .split("https://")[1]
+                        .split(".vercel")[0]
+                    }
                   </a>
                   . Wszystkie prawa zastrzeżone.
                 </span>
@@ -36,8 +40,9 @@ const Footer = () => {
               O nas
             </Link>
             <Link
-              to="#privacy"
+              to="/privacy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               Prywatność
             </Link>
