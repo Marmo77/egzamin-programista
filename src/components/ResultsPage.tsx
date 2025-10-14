@@ -5,6 +5,8 @@ import type { QuestionEvaluation } from "@/hooks/QuestionResults";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "./ui/button";
 import NoResults from "./Theory/NoResults";
+import SEO from "./SEO";
+import { AppConstants } from "@/data/constants";
 
 type PersistedResults = {
   results: QuestionEvaluation[];
@@ -42,6 +44,11 @@ const ResultsPage = () => {
 
   return (
     <>
+      <SEO
+        title={`Wyniki testu ${exam_type.toUpperCase()} - Egzamin Teoretyczny | Egzamin Programista`}
+        description={`Wyniki testu teoretycznego z ${exam_type.toUpperCase()}. 40 pytań z oficjalnej bazy CKE.`}
+        url={`${AppConstants.Website.link}/theory/${exam_type}`}
+      />
       <ResultsCard
         results={data.results}
         questions={data.questions}

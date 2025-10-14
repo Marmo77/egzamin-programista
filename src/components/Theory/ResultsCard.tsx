@@ -5,12 +5,8 @@ import { Progress } from "../ui/progress";
 import type { QuestionType } from "@/types/types";
 import type { QuestionEvaluation } from "@/hooks/QuestionResults";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Info, Trash2 } from "lucide-react";
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "../ui/hover-card";
+import { ArrowLeft, Trash2 } from "lucide-react";
+import { memo } from "react";
 import { toast } from "sonner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
@@ -84,80 +80,91 @@ const ResultsCard = ({
   );
 };
 
-const ScoreAndProgress = ({
-  resultPercent,
-  resultPoints,
-  summary,
-}: {
-  resultPercent: number;
-  resultPoints: number;
-  summary: { total: number; correct: number };
-}) => {
-  return (
-    <>
-      <div className="flex items-center justify-center gap-3">
-        <span className="text-base font-medium">Uzyskany wynik:</span>
-        <Badge
-          variant={resultPercent >= 0.5 ? "default" : "destructive"}
-          className={`text-base px-3 py-1 ${
-            resultPercent >= 0.5 ? "bg-green-500" : "bg-red-500"
-          }`}
-        >
-          {resultPoints}%
-        </Badge>
-      </div>
-      <div className="w-full max-w-md mx-auto">
-        <Progress
-          value={resultPoints}
-          className={`h-2 bg-gray-200 ${
-            resultPercent >= 0.5 ? "[&>div]:bg-green-500" : "[&>div]:bg-red-500"
-          }`}
-        />
-        <div className="mt-2 text-xs text-muted-foreground">
-          {summary.correct} z {summary.total} poprawnych
+const ScoreAndProgress = memo(
+  ({
+    resultPercent,
+    resultPoints,
+    summary,
+  }: {
+    resultPercent: number;
+    resultPoints: number;
+    summary: { total: number; correct: number };
+  }) => {
+    return (
+      <>
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-base font-medium">Uzyskany wynik:</span>
+          <Badge
+            variant={resultPercent >= 0.5 ? "default" : "destructive"}
+            className={`text-base px-3 py-1 ${
+              resultPercent >= 0.5 ? "bg-green-500" : "bg-red-500"
+            }`}
+          >
+            {resultPoints}%
+          </Badge>
         </div>
-      </div>
-    </>
-  );
-};
+        <div className="w-full max-w-md mx-auto">
+          <Progress
+            value={resultPoints}
+            className={`h-2 bg-gray-200 ${
+              resultPercent >= 0.5
+                ? "[&>div]:bg-green-500"
+                : "[&>div]:bg-red-500"
+            }`}
+          />
+          <div className="mt-2 text-xs text-muted-foreground">
+            {summary.correct} z {summary.total} poprawnych
+          </div>
+        </div>
+      </>
+    );
+  }
+);
 
-const Statistics = ({
-  summary,
-}: {
-  summary: { total: number; correct: number; incorrect: number; time: number };
-}) => {
-  const formatDoingTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
-  return (
-    <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
-      <div className="rounded-md border p-3 text-center">
-        <div className="text-xs text-muted-foreground">Wszystkie</div>
-        <div className="text-lg font-semibold">{summary.total}</div>
-      </div>
-      <div className="rounded-md border p-3 text-center">
-        <div className="text-xs text-muted-foreground">Poprawne</div>
-        <div className="text-lg font-semibold text-green-600">
-          {summary.correct}
+const Statistics = memo(
+  ({
+    summary,
+  }: {
+    summary: {
+      total: number;
+      correct: number;
+      incorrect: number;
+      time: number;
+    };
+  }) => {
+    const formatDoingTime = (time: number) => {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    };
+    return (
+      <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
+        <div className="rounded-md border p-3 text-center">
+          <div className="text-xs text-muted-foreground">Wszystkie</div>
+          <div className="text-lg font-semibold">{summary.total}</div>
+        </div>
+        <div className="rounded-md border p-3 text-center">
+          <div className="text-xs text-muted-foreground">Poprawne</div>
+          <div className="text-lg font-semibold text-green-600">
+            {summary.correct}
+          </div>
+        </div>
+        <div className="rounded-md border p-3 text-center">
+          <div className="text-xs text-muted-foreground">Błędne</div>
+          <div className="text-lg font-semibold text-red-600">
+            {summary.incorrect}
+          </div>
+        </div>
+        <div className="col-span-3 gap-6 border p-2">
+          <div className="text-xs text-muted-foreground">Czas realizacji</div>
+          <div className="text-lg font-semibold text-blue-600">
+            {formatDoingTime(summary.time)}
+          </div>
         </div>
       </div>
-      <div className="rounded-md border p-3 text-center">
-        <div className="text-xs text-muted-foreground">Błędne</div>
-        <div className="text-lg font-semibold text-red-600">
-          {summary.incorrect}
-        </div>
-      </div>
-      <div className="col-span-3 gap-6 border p-2">
-        <div className="text-xs text-muted-foreground">Czas realizacji</div>
-        <div className="text-lg font-semibold text-blue-600">
-          {formatDoingTime(summary.time)}
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 const AnswersCards = ({
   results,

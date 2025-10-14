@@ -9,7 +9,7 @@ import type { QuestionType } from "@/types/types";
 import { Button } from "../ui/button";
 import { QuestionResults } from "@/hooks/QuestionResults";
 import { useNavigate, useParams } from "react-router-dom";
-import LoadingQuestions from "./LoadingQuestions";
+import LoadingQuestions from "./LoadingSkeletons";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import NoQuestions from "./NoQuestions";
 import ProgressNavigation from "./ProgressNavigation";
@@ -26,6 +26,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { AppConstants } from "@/data/constants";
+import SEO from "../SEO";
 // { type }: { type: string }
 const Question = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -145,6 +146,11 @@ const Question = () => {
   }, [timeLeft]);
   return (
     <>
+      <SEO
+        title={`Test ${exam_type.toUpperCase()} - Egzamin Teoretyczny | Egzamin Programista`}
+        description={`Rozwiązuj test teoretyczny z ${exam_type.toUpperCase()}. 40 pytań z oficjalnej bazy CKE.`}
+        url={`${AppConstants.Website.link}/theory/${exam_type}`}
+      />
       {isLoading ? (
         <LoadingQuestions exam_type={exam_type} />
       ) : question.length === 0 ? (

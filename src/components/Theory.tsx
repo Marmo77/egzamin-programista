@@ -7,11 +7,11 @@ import {
 } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import SEO from "./SEO";
 import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
 import { memo, lazy } from "react";
-// import { redirectInWorkonClick } from "@/hooks/redirectInWork";
 // Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
@@ -40,47 +40,54 @@ const Theory = () => {
   // }, []);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-semibold text-foreground mb-4">
-          Wybierz kwalifikację egzaminacyjną
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Rozpocznij test teoretyczny z wybranej kwalifikacji. Test zawiera 40
-          losowych pytań i trwa 60 minut.
-        </p>
-      </div>
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
-        <ExamCard
-          subject="inf03"
-          title="INF.03"
-          badges={["HTML/CSS", "JavaScript", "PHP", "Bazy danych"]}
-          description="Tworzenie i administrowanie stronami i aplikacjami internetowymi"
-          Icon={Code}
-          icon_color="blue"
-        />
-        <ExamCard
-          title="INF.04"
-          subject="inf04"
-          badges={["C++", "Python", "Algorytmy", "Struktury danych"]}
-          description="Projektowanie i programowanie aplikacji desktopowych i mobilnych"
-          Icon={Database}
-          icon_color="green"
-        />
-      </div>
-      <div className="text-center">
-        <Button variant="outline" onClick={onBackToHome} className="px-8">
-          <ChevronLeft className="w-4 h-4 mr-2" />
-          Powrót do Strony Głównej
-        </Button>
-      </div>
-      {/* Credit Avatar */}
-      {/*</div>{showCredits && (
+    <>
+      <SEO
+        title="Wybierz Egzamin - INF.03 lub INF.04 | Egzamin Programista"
+        description="Rozpocznij test teoretyczny z kwalifikacji INF.03 (tworzenie stron) lub INF.04 (programowanie aplikacji). 40 pytań, 60 minut."
+        url={`${AppConstants.Website.link}/theory`}
+      />
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-semibold text-foreground mb-4">
+            Wybierz kwalifikację egzaminacyjną
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Rozpocznij test teoretyczny z wybranej kwalifikacji. Test zawiera 40
+            losowych pytań i trwa 60 minut.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <ExamCard
+            subject="inf03"
+            title="INF.03"
+            badges={["HTML/CSS", "JavaScript", "PHP", "Bazy danych"]}
+            description="Tworzenie i administrowanie stronami i aplikacjami internetowymi"
+            Icon={Code}
+            icon_color="blue"
+          />
+          <ExamCard
+            title="INF.04"
+            subject="inf04"
+            badges={["C++", "Python", "Algorytmy", "Struktury danych"]}
+            description="Projektowanie i programowanie aplikacji desktopowych i mobilnych"
+            Icon={Database}
+            icon_color="green"
+          />
+        </div>
+        <div className="text-center">
+          <Button variant="outline" onClick={onBackToHome} className="px-8">
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Powrót do Strony Głównej
+          </Button>
+        </div>
+        {/* Credit Avatar */}
+        {/*</div>{showCredits && (
         <Suspense fallback={<div className="h-20" />}> */}
-      <Credits /> {/* For faster loading suspense */}
-      {/* </Suspense> } 
+        <Credits /> {/* For faster loading suspense */}
+        {/* </Suspense> } 
       )} */}
-    </div>
+      </div>
+    </>
   );
 };
 
