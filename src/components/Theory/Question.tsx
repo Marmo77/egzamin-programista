@@ -26,6 +26,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { AppConstants } from "@/data/constants";
+import SEO from "../SEO";
 // { type }: { type: string }
 const Question = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -145,6 +146,11 @@ const Question = () => {
   }, [timeLeft]);
   return (
     <>
+      <SEO
+        title={`Test ${exam_type.toUpperCase()} - Egzamin Teoretyczny | Egzamin Programista`}
+        description={`Rozwiązuj test teoretyczny z ${exam_type.toUpperCase()}. 40 pytań z oficjalnej bazy CKE.`}
+        url={`${AppConstants.Website.link}/theory/${exam_type}`}
+      />
       {isLoading ? (
         <LoadingQuestions exam_type={exam_type} />
       ) : question.length === 0 ? (
