@@ -22,6 +22,8 @@ const ResultsPage = lazy(() => import("./components/ResultsPage"));
 const WorkInProgress = lazy(() => import("./components/WorkInProgress"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
+const Privacy = lazy(() => import("./components/Privacy"));
+
 function App() {
   return (
     <Routes>
@@ -91,8 +93,33 @@ function App() {
             </Suspense>
           }
         />
+        <Route
+          path="/privacy"
+          element={
+            <Suspense
+              fallback={
+                <LoadingSkeletons
+                  page
+                  pageValues={[
+                    "Polityka Prywatności",
+                    "Ładujemy politykę prywatności, proszę czekać...",
+                  ]}
+                />
+              }
+            >
+              <Privacy />
+            </Suspense>
+          }
+        />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<LoadingSkeletons page />}>
+            <NotFound />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 }

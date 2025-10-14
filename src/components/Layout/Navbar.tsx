@@ -83,7 +83,10 @@ export default function Navbar() {
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <GraduationCap className="w-5 h-5 text-white" />
           </div>
-          <Link to={"/"}>
+          <Link
+            to={"/"}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             <h1 className="text-primary font-semibold hover:text-blue-600 transition-colors">
               {AppConstants.Website.Title}
             </h1>
@@ -98,12 +101,14 @@ export default function Navbar() {
           <Link
             to={AppConstants.Navigation.Theory}
             className="text-primary/85 hover:text-primary transition-colors font-medium"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             Teoria
           </Link>
           <Link
             to={AppConstants.Navigation.Practice}
             className="text-primary/90 hover:text-primary transition-colors font-medium"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             Praktyka
           </Link>
