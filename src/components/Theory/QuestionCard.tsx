@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import QuestionReport from "./QuestionReport";
 import type { QuestionType } from "@/types/types";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 const QuestionCard = memo(
   ({
@@ -23,7 +23,10 @@ const QuestionCard = memo(
     const currentQuestion = question[questionNumber - 1];
 
     // preload image
-    const imageUrl = currentQuestion?.imageUrl;
+    const imageUrl = useMemo(
+      () => currentQuestion?.imageUrl,
+      [currentQuestion?.imageUrl]
+    );
     const hasImage = !!imageUrl;
 
     const AnswersButtons = [
@@ -83,6 +86,7 @@ const QuestionCard = memo(
                 alt={`obraz ${questionNumber}`}
                 className="w-[600px] h-auto"
                 loading="lazy"
+                decoding="async"
                 src={imageUrl}
               />
             </div>

@@ -184,6 +184,14 @@ const AnswersCards = ({
       { key: "D", text: q.answer_d },
     ];
 
+    const questionImage = q.imageUrl && (
+      <img
+        src={q.imageUrl}
+        alt={`${q.subject} ${q.image}`}
+        className="h-auto"
+      />
+    );
+
     const questionStatus =
       result.zaznaczono === null
         ? "not-answered"
@@ -224,6 +232,10 @@ const AnswersCards = ({
             {idx + 1}. {q.question_text}
           </h3>
           {statusBadge}
+        </div>
+        {/* Question Image */}
+        <div className="px-4 py-2 flex justify-center max-h-64">
+          {questionImage}
         </div>
 
         {/* Answers */}
