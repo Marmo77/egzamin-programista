@@ -13,6 +13,7 @@ type PersistedResults = {
   summary?: { total: number; correct: number; incorrect: number; time: number };
   questions: QuestionType[];
 };
+// ON RESULTS PAGE LOAD ALREADY RENDERED IMAGES .
 
 const ResultsPage = () => {
   const params = useParams<string>();
