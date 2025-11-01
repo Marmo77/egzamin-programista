@@ -209,7 +209,7 @@ const AnswersCards = ({
       ) : (
         <Badge
           variant="destructive"
-          className="bg-yellow-500 hover:bg-yellow-600"
+          className="bg-yellow-500 dark:bg-yellow-500 hover:bg-yellow-600"
         >
           Brak odpowiedzi
         </Badge>
