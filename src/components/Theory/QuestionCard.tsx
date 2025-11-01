@@ -73,15 +73,6 @@ const QuestionCard = memo(
           {/* if image is not null or empty string:  */}
           {hasImage && (
             <div>
-              {/* WHAT TO DO: */}
-              {/* Status Code 403 Forbidden */}
-              {/* it means that we cannot get from their page images */}
-              {/* we need to get images from our own server, so we need to download it */}
-              {/* https://ee-informatyk.pl/src/img/quizy/ee09/{questionNumber}.jpg */}
-              {/* so we can scrape only questions with images and downloads them to our server and we need to add every question an order numbers so we can pin the images to the questions */}
-              {/* example: question_number: 120, image: question120.jpg */}
-              {/* its done in VSC all i have 2 scrips working, now add images to bucket and connect to database, (remember to update the database quesitons with questios.txt from 21:10) */}
-
               <img
                 alt={`obraz ${questionNumber}`}
                 className="w-[600px] h-auto"

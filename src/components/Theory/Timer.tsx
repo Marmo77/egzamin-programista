@@ -41,4 +41,4 @@ ${timeLeft < 300 ? "text-red-600" : "text-foreground"}`}
   }
 );
 
-export default Timer;
+export default memo(Timer);
