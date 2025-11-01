@@ -1,12 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-// import Question from "./components/Theory/Question";
-// import ResultsPage from "./components/ResultsPage";
-// import Theory from "./components/Theory";
-// import NotFound from "./components/NotFound";
-// import Home from "./components/Home";
-// import Practice from "./components/Practice";
-// import WorkInProgress from "./components/WorkInProgress";
 import Home from "./components/Home";
 import LoadingSkeletons from "./components/Theory/LoadingSkeletons";
 

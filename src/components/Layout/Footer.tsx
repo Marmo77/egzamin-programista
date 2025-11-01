@@ -1,4 +1,4 @@
-import { Mail, Github } from "lucide-react";
+import { Github } from "lucide-react"; //Mail,
 import { AppConstants } from "@/data/constants";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
@@ -33,12 +33,13 @@ const Footer = () => {
 
           {/* Right side - Links */}
           <div className="flex items-center space-x-4">
-            <Link
+            {/* <Link
               to="#o-nas"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               O nas
-            </Link>
+            </Link> */}
+
             <Link
               to="/privacy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -46,7 +47,7 @@ const Footer = () => {
             >
               Prywatność
             </Link>
-            <Button
+            {/* <Button
               variant="ghost"
               onClick={() =>
                 window.open("mailto:hello@passtheexam.pl", "_blank")
@@ -55,7 +56,7 @@ const Footer = () => {
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
-            </Button>
+            </Button> */}
             <Button
               variant="ghost"
               onClick={() => window.open(AppConstants.Credits.link, "_blank")}

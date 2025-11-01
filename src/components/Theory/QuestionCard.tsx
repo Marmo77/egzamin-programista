@@ -121,4 +121,4 @@ const QuestionCard = memo(
   }
 );
 
-export default QuestionCard;
+export default memo(QuestionCard);

@@ -78,4 +78,4 @@ const ConfirmExitDialog = ({
   );
 };
 
-export default ProgressNavigation;
+export default memo(ProgressNavigation);
