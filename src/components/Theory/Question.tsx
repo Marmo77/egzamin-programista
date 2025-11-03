@@ -51,34 +51,64 @@ const Question = () => {
   useEffect(() => {
     const loadQuestionsAndImages = async () => {
       try {
-        setIsLoading(true);
-
-        // Pobieranie pytań z bazy danych
-        const questions = await getRandomQuestions(exam_type, 40);
-
-        if (!questions || question.length) {
+        const questions: QuestionType[] = await getRandomQuestions(
+          exam_type,
+          40
+        );
+        if (!questions || questions.length === 0) {
           setQuestion([]);
           setIsLoading(false);
-          return;
+          return [];
         }
-
-        // Preloadowanie zdjęć
-
-        await preloadQuestionImages(questions);
-
         setQuestion(questions);
-        setAnswers(Array(questions.length).fill(null)); // tworzy tablice o długości q.length i wypełnia ją nullami (jeśli nie zaznaczono odpowiedzi to jest null)
-        setCurrentQuestion(1); //Wczytuje na start od pierwszego pytania
-        setSelectedAnswer(null); //Resetuje zaznaczoną odpowiedź
+        // preload images
+        setAnswers(new Array(question.length).fill(null));
+        setCurrentQuestion(1);
+        setSelectedAnswer(null);
+        console.log(questions);
+        const questionsWithImages = questions.filter((q) => q.imageUrl);
+
+        if (questionsWithImages.length > 0) {
+          await preloadQuestionImages(questions);
+        }
       } catch (e) {
-        console.error("Failed to load questions or images:", e);
+        console.error("Failed to load questions:", e);
         setQuestion([]);
       } finally {
         setIsLoading(false);
       }
     };
-
     loadQuestionsAndImages();
+    // const loadQuestionsAndImages = async () => {
+    //   try {
+    //     setIsLoading(true);
+
+    //     // Pobieranie pytań z bazy danych
+    //     const questions = await getRandomQuestions(exam_type, 40);
+
+    //     if (!questions || question.length) {
+    //       setQuestion([]);
+    //       setIsLoading(false);
+    //       return;
+    //     }
+
+    //     // Preloadowanie zdjęć
+
+    //     await preloadQuestionImages(questions);
+
+    //     setQuestion(questions);
+    //     setAnswers(Array(questions.length).fill(null)); // tworzy tablice o długości q.length i wypełnia ją nullami (jeśli nie zaznaczono odpowiedzi to jest null)
+    //     setCurrentQuestion(1); //Wczytuje na start od pierwszego pytania
+    //     setSelectedAnswer(null); //Resetuje zaznaczoną odpowiedź
+    //   } catch (e) {
+    //     console.error("Failed to load questions or images:", e);
+    //     setQuestion([]);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
+
+    // loadQuestionsAndImages();
   }, [exam_type]);
 
   const handleNextQuestion = () => {
