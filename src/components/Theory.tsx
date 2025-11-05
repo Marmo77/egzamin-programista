@@ -12,6 +12,7 @@ import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
 import { memo, lazy } from "react";
+import UserResults from "./Theory/UserResults";
 // Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
@@ -79,6 +80,9 @@ const Theory = () => {
             <ChevronLeft className="w-4 h-4 mr-2" />
             Powrót do Strony Głównej
           </Button>
+        </div>
+        <div className="flex justify-center">
+          <UserResults />
         </div>
         {/* Credit Avatar */}
         {/*</div>{showCredits && (
