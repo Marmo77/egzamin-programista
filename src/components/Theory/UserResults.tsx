@@ -14,7 +14,7 @@ const UserResults = () => {
       <CardTitle className="text-center text-xl">Twoje wyniki</CardTitle>
       <CardContent className="flex flex-col gap-2">
         <p className="text-sm text-center">
-          Zobacz wyniki swojego poprzedniego wyniku{" "}
+          Zobacz wyniki swojego poprzedniego testu{" "}
         </p>
         <i className="text-xs text-center">
           (Pod warunkiem że go nie usunąłeś)

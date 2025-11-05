@@ -81,9 +81,10 @@ const Theory = () => {
             Powrót do Strony Głównej
           </Button>
         </div>
-        <div className="flex justify-center">
+        {/* NEW: User Results to see the previous test results */}
+        {/* <div className="flex justify-center">
           <UserResults />
-        </div>
+        </div> */}
         {/* Credit Avatar */}
         {/*</div>{showCredits && (
         <Suspense fallback={<div className="h-20" />}> */}
