@@ -163,3 +163,10 @@
 body{
   scroll-behavior: smooth;
 }
+
+.zoomed {
+  transform: scale(2.5);
+}
+.un_zoomed {
+  transform: scale(1);
+}
