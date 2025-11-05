@@ -9,6 +9,7 @@ import { ArrowLeft, Trash2 } from "lucide-react";
 import { memo } from "react";
 import { toast } from "sonner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import ZoomImage from "./ZoomImage";
 
 const ResultsCard = ({
   results,
@@ -184,13 +185,13 @@ const AnswersCards = ({
       { key: "D", text: q.answer_d },
     ];
 
-    const questionImage = q.imageUrl && (
-      <img
-        src={q.imageUrl}
-        alt={`${q.subject} ${q.image}`}
-        className="h-auto"
-      />
-    );
+    // const questionImage = q.imageUrl && (
+    //   <img
+    //     src={q.imageUrl}
+    //     alt={`${q.subject} ${q.image}`}
+    //     className="h-auto"
+    //   />
+    // );
 
     const questionStatus =
       result.zaznaczono === null
@@ -234,9 +235,16 @@ const AnswersCards = ({
           {statusBadge}
         </div>
         {/* Question Image */}
-        <div className="px-4 py-2 flex justify-center max-h-64">
-          {questionImage}
-        </div>
+        {q.imageUrl && (
+          <div className="px-4 py-2 flex justify-center">
+            <ZoomImage questionNumber={idx + 1} imageUrl={q.imageUrl ?? ""} />
+            {/* <img
+              src={q.imageUrl}
+              alt={`${q.subject} ${q.image}`}
+              className="h-auto"
+            /> */}
+          </div>
+        )}
 
         {/* Answers */}
         <div className="flex flex-col gap-2 px-3 py-3">
