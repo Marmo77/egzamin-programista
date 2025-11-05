@@ -12,6 +12,7 @@ import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
 import { memo, lazy } from "react";
+import UserResults from "./Theory/UserResults";
 // Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
@@ -80,6 +81,10 @@ const Theory = () => {
             Powrót do Strony Głównej
           </Button>
         </div>
+        {/* NEW: User Results to see the previous test results */}
+        {/* <div className="flex justify-center">
+          <UserResults />
+        </div> */}
         {/* Credit Avatar */}
         {/*</div>{showCredits && (
         <Suspense fallback={<div className="h-20" />}> */}

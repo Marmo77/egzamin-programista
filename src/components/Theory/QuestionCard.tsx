@@ -4,6 +4,7 @@ import { Badge } from "../ui/badge";
 import QuestionReport from "./QuestionReport";
 import type { QuestionType } from "@/types/types";
 import { memo, useMemo } from "react";
+import ZoomImage from "./ZoomImage";
 
 const QuestionCard = memo(
   ({
@@ -72,15 +73,7 @@ const QuestionCard = memo(
           </div>
           {/* if image is not null or empty string:  */}
           {hasImage && (
-            <div>
-              <img
-                alt={`obraz ${questionNumber}`}
-                className="w-[600px] h-auto"
-                loading="lazy"
-                decoding="async"
-                src={imageUrl}
-              />
-            </div>
+            <ZoomImage questionNumber={questionNumber} imageUrl={imageUrl} />
           )}
         </CardHeader>
         <CardContent>
