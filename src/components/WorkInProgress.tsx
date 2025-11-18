@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "./ui/button";
 import { ArrowLeft, Clock, Construction } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/card";
