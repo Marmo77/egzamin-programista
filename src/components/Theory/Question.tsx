@@ -65,7 +65,7 @@ const Question = () => {
         setAnswers(new Array(question.length).fill(null));
         setCurrentQuestion(1);
         setSelectedAnswer(null);
-        console.log(questions);
+        // console.log(questions);
         const questionsWithImages = questions.filter((q) => q.imageUrl);
 
         if (questionsWithImages.length > 0) {
