@@ -81,7 +81,7 @@ const HeroProsCards = () => {
     {
       title: "100% Za Darmo",
       description:
-        "Projekt non-profit. Strona jest w 100% darmowe bez reklam. Możesz wesprzeć, ale nie musisz.",
+        "Projekt non-profit. Strona jest w 100% darmowe bez reklam. Dziękujemy za korzystanie z naszej strony!",
       icon: Coffee,
       colors: [
         {

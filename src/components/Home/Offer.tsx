@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../ui/button";
 import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";

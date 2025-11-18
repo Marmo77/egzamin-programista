@@ -12,7 +12,6 @@ import { ChevronLeft, Code, Database } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppConstants } from "@/data/constants";
 import { memo, lazy } from "react";
-import UserResults from "./Theory/UserResults";
 // Suspense
 // lazy load avatar
 const Avatar = lazy(() =>
@@ -30,15 +29,6 @@ const Theory = () => {
   const onBackToHome = () => {
     navigate("/");
   };
-
-  // const [showCredits, setShowCredits] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowCredits(true);
-  //   }, 100);
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   return (
     <>

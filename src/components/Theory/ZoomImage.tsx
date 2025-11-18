@@ -8,7 +8,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const ZoomImage = ({
   questionNumber,

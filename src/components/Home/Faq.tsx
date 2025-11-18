@@ -54,6 +54,11 @@ const Faq = () => {
         "Tak! Strona jest responsywna i działa na telefonach, tabletach i komputerach. Możesz ćwiczyć wszędzie! 📱",
     },
     {
+      question: "Ile jest pytań w testach?",
+      answer:
+        "W każdym testach jest 40 pytań. Możesz robić tyle testów ile chcesz. Za każdym razem losowany jest nowy zestaw pytań. Aktualnie jest ponad 2000 pytań w bazie danych.",
+    },
+    {
       question: "Kto stoi za tym projektem?",
       answer:
         "Cześć! Jestem uczniem, który przeszedł przez ten sam proces. Postanowiłem pomóc innym, bo wiem jak stresujące mogą być te egzaminy. Kod jest dostępny na GitHub! 👨‍💻",
@@ -95,7 +100,7 @@ const Faq = () => {
           <span className="text-sm text-blue-800 dark:text-blue-400">
             Masz inne pytanie? Napisz na{" "}
             <a
-              href="https://github.com/zdajprogramiste/passtheexams/issues"
+              href="https://github.com/Marmo77/egzamin-programista/issues"
               className="hover:underline dark:text-blue-300 font-semibold"
               target="_blank"
             >

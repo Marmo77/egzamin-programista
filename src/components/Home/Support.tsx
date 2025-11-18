@@ -1,6 +1,5 @@
-import React from "react";
 import { Card, CardContent } from "../ui/card";
-import { Coffee, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "../ui/button";
 
 const Support = () => {
@@ -21,9 +20,14 @@ const Support = () => {
           </p>
           <Button
             className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 group"
-            onClick={() =>
-              window.open("https://buymeacoffee.com/zdajprogramiste", "_blank")
-            }
+            onClick={() => {
+              // window.open("", "_blank")
+              alert("Aktualnie nie przyjmujemy wsparcia. <3");
+              window.open(
+                "https://github.com/Marmo77/egzamin-programista",
+                "_blank"
+              );
+            }}
           >
             <Heart className="w-4 h-4 mr-2 group-hover:fill-white" />
             Wspieraj projekt

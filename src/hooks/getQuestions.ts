@@ -8,6 +8,8 @@ import supabase from "../utils/supabase";
 //
 //```
 
+// base limit is 40 questions
+// if limit is not provided, it will return 40 questions
 export const getRandomQuestions = async (
   subject: string,
   limit: number = 40

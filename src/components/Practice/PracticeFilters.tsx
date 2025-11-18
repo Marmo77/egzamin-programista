@@ -1,7 +1,6 @@
 // src/components/Practice/PracticeFilters.tsx
-import { Search } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
-import { Input } from "../ui/input";
+
 import {
   Select,
   SelectContent,

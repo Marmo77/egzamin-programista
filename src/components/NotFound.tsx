@@ -6,7 +6,6 @@ import {
   BookOpenText,
   HandCoins,
 } from "lucide-react";
-import React from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -41,10 +40,10 @@ const NotFound = () => {
     },
     {
       icon: BookOpenText,
-      title: "O Nas",
-      description: "Chciałeś się dowiedzieć więcej o projekcie",
-      action: "O nas",
-      link: "/about",
+      title: "Polityka prywatności",
+      description: "Wyjaśnia jak dane są używane",
+      action: "Polityka prywatności",
+      link: "/privacy",
     },
     {
       icon: HandCoins,
@@ -113,7 +112,7 @@ const NotFound = () => {
                 className="group cursor-pointer hover:shadow-lg transition-all duration-200 border-border hover:border-primary/20"
                 onClick={() => (window.location.href = suggestion.link)}
               >
-                <CardContent className="p-6 text-center">
+                <CardContent className=" text-center">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                     <suggestion.icon className="w-6 h-6 text-primary" />
                   </div>
