@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Toaster } from "sonner";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundary>
