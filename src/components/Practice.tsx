@@ -97,10 +97,10 @@ const Practice = () => {
   );
 
   // Redirect to work in progress
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/work-in-progress");
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   navigate("/work-in-progress");
+  // }, []);
 
   return (
     <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8">
