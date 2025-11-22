@@ -1,18 +1,35 @@
 import { getPracticeExams } from "@/hooks/getPracticeExams";
-import { type PracticeType } from "@/types/types";
+import { type PracticeFilterOptions, type PracticeType } from "@/types/types";
 import { useEffect, useState } from "react";
 import PracticeCardNew from "./Practice/PracticeCardNew";
+import PracticeFilters from "./Practice/PracticeFilters";
 
 const PracticeNew = () => {
   const [exams, setExams] = useState<PracticeType[]>([]);
   const [totalCount, setTotalCount] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [userViewed, setUserViewed] = useState<Record<string, boolean>>({});
+  const [filters, setFilters] = useState<PracticeFilterOptions>({
+    // search: "",
+    subject: "",
+    languages: "",
+    sort: "",
+    year: "",
+  });
+
+  const handleFilterChange = (
+    key: keyof PracticeFilterOptions,
+    value: string
+  ) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [key]: value,
+    }));
+  };
 
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const { data, count } = await getPracticeExams();
+        const { data, count } = await getPracticeExams(filters);
         setExams(data);
         setTotalCount(count);
         console.log("Fetched exams:", data);
@@ -23,7 +40,11 @@ const PracticeNew = () => {
       }
     };
     fetchExams();
-  }, []);
+  }, [filters]);
+
+  // useEffect(() => {
+  //   console.log(filters);
+  // }, [filters]);
 
   return (
     <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8">
@@ -37,7 +58,12 @@ const PracticeNew = () => {
             kwalifikacji.
           </p>
         </div>
-        <div>{/* FITERS */}</div>
+        <div>
+          <PracticeFilters
+            filters={filters}
+            onFilterChange={handleFilterChange}
+          />
+        </div>
         {!isLoading && totalCount !== undefined && totalCount > 0 && (
           <div className="text-sm flex justify-end px-2 text-muted-foreground mb-4">
             Znaleziono {totalCount}{" "}
