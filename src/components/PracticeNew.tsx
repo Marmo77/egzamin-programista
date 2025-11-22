@@ -32,7 +32,7 @@ const PracticeNew = () => {
         <div>
             Exams {totalCount}
         </div>
-        <div className='grid grid-cols-3 max-w-6xl gap-5 mx-auto'>
+        <div className='grid grid-cols-2 max-w-6xl gap-5 mx-auto px-8'>
             {exams.map((exam) => (
                 <PracticeCardNew key={exam.id} exam={exam}/>
             ))}
