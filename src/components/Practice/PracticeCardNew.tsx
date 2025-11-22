@@ -96,7 +96,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
         <CardTitle className="text-lg text-primary font-semibold">
           {exam.name}
         </CardTitle>
-          <Badge className="bg-gray-900 py-1 px-2.5 rounded-xl flex items-center gap-1 uppercase dark:bg-primary dark:text-primary-foreground">
+          <Badge className="bg-gray-900 px-2.5 rounded-xl flex items-center gap-1 uppercase dark:bg-primary dark:text-primary-foreground">
             {exam.subject}
           </Badge>
         </div>
@@ -109,10 +109,12 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
               <Calendar className="w-4 h-4 text-gray-400" />
               {exam.data}
             </div>
-            {/* <div className="flex items-center text-sm text-gray-600 gap-2">
+            <div className="flex items-center text-sm text-gray-600 gap-2">
               <FileText className="w-4 h-4 text-gray-400" />
-              {availableSolution}
-            </div> */}
+              {exam.kind ? (
+                <span>{exam.kind.join(", ")}</span>
+               ) : ("Nieznane")}
+            </div>
           </ul>
         </div>
         <div className="flex flex-col gap-3">

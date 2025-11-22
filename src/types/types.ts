@@ -36,6 +36,8 @@ export type PracticeType = {
   materials_link: string;
   key_link: string;
   created_at?: string;
+  kind: string[];
+
 }
 
 export type ReportType = {
