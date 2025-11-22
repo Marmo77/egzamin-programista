@@ -34,7 +34,7 @@ export const getPracticeExams = async (
       break;
 
     default:
-      query = query.order("name", { ascending: false });
+      query = query.order("data", { ascending: false });
   }
 
   const { data, error, count } = await query;

@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import LoadingSkeletons from "./components/Theory/LoadingSkeletons";
 
 import { lazy, Suspense } from "react";
-import PracticeNew from "./components/PracticeNew";
 
 //lazy load other pages that user might not visit
 const Theory = lazy(() => import("./components/Theory"));
@@ -75,7 +74,7 @@ function App() {
                 />
               }
             >
-              <PracticeNew />
+              <Practice />
             </Suspense>
           }
         />
