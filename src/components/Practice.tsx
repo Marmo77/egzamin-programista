@@ -5,7 +5,6 @@ import type { ExamType } from "@/types/types";
 import PracticeCard from "./Practice/PracticeCard";
 import PracticeFilters from "./Practice/PracticeFilters";
 
-import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
 import PaginationPractice from "./Practice/Pagination";
