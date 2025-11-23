@@ -115,7 +115,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
           </ul>
         </div>
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap gap-2">
             {/* LANGUAGES USED */}
             {languages}
           </div>
