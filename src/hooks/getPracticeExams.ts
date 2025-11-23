@@ -2,10 +2,16 @@ import type { PracticeFilterOptions, PracticeType } from "@/types/types";
 import supabase from "@/utils/supabase";
 
 export const getPracticeExams = async (
-  filters: PracticeFilterOptions
+  filters: PracticeFilterOptions,
+  page: number,
+  limit: number = 9
 ): Promise<{ data: PracticeType[]; count: number }> => {
   // filtering
   let query = supabase.from("practice").select("*", { count: "exact" });
+
+  if (page > 0) {
+    query = query.range((page - 1) * limit, page * limit - 1);
+  }
 
   // Subject
   if (filters.subject && filters.subject !== "all") {
@@ -38,11 +44,6 @@ export const getPracticeExams = async (
   }
 
   const { data, error, count } = await query;
-
-  //   const { data, error, count } = await supabase
-  //     .from("practice")
-  //     .select("*", { count: "exact" })
-  //     .order("data", { ascending: false });
 
   if (error) {
     console.error(error);

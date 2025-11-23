@@ -1,16 +1,18 @@
 import { getPracticeExams } from "@/hooks/getPracticeExams";
 import { type PracticeFilterOptions, type PracticeType } from "@/types/types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PracticeCardNew from "./Practice/PracticeCard";
 import PracticeFilters from "./Practice/PracticeFilters";
 import { Card, CardContent } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
+import PaginationPractice from "./Practice/Pagination";
 
 const Practice = () => {
   const [exams, setExams] = useState<PracticeType[]>([]);
-  const [totalCount, setTotalCount] = useState<number>();
+  const [totalCount, setTotalCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [filters, setFilters] = useState<PracticeFilterOptions>({
     // search: "",
     subject: "",
@@ -28,11 +30,25 @@ const Practice = () => {
       [key]: value,
     }));
   };
+  const limit = 9;
+
+  const prevFiltersRef = useRef<string>("");
 
   useEffect(() => {
+    const filtersChanged = JSON.stringify(filters) !== prevFiltersRef.current;
+    prevFiltersRef.current = JSON.stringify(filters);
+
+    if (filtersChanged) {
+      setCurrentPage(1);
+    }
+
     const fetchExams = async () => {
       try {
-        const { data, count } = await getPracticeExams(filters);
+        const { data, count } = await getPracticeExams(
+          filters,
+          currentPage,
+          limit
+        );
         setExams(data);
         setTotalCount(count);
         console.log("Fetched exams:", data);
@@ -43,12 +59,19 @@ const Practice = () => {
       }
     };
     fetchExams();
-  }, [filters]);
+  }, [filters, currentPage]);
 
   const resetFilters = () => {
     Object.keys(filters).forEach((key) => {
       handleFilterChange(key as keyof PracticeFilterOptions, "");
     });
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > Math.ceil(totalCount / limit)) return;
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -80,6 +103,12 @@ const Practice = () => {
               : "egzaminów"}
           </div>
         )}
+        <PaginationPractice
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+          totalExams={totalCount}
+          limit={limit}
+        />
         {!isLoading && totalCount == 0 && (
           <div className="col-span-full text-center flex flex-col gap-3 items-center py-12 text-muted-foreground">
             Nie znaleziono egzaminów spełniających kryteria wyszukiwania
@@ -99,6 +128,16 @@ const Practice = () => {
           {!isLoading &&
             exams.map((exam) => <PracticeCardNew key={exam.id} exam={exam} />)}
         </div>
+        {!isLoading && totalCount !== undefined && totalCount > 0 && (
+          <div className="pt-4">
+            <PaginationPractice
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              totalExams={totalCount}
+              limit={limit}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
