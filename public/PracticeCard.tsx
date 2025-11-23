@@ -100,9 +100,9 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col h-full">
+      <CardContent className="flex justify-between flex-col h-full min-h-[200px]">
         {/* Informacje o egzaminie */}
-        <div className="flex flex-col -mt-4 gap-2">
+        <div className="flex flex-col gap-2">
           <ul className="space-y-2 mb-4">
             <div className="flex items-center text-sm text-gray-600 gap-2">
               <Calendar className="w-4 h-4 text-gray-400" />
@@ -114,7 +114,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
             </div>
           </ul>
         </div>
-        <div className="flex flex-wrap items-start gap-2 pb-3 h-full">
+        <div className="flex flex-wrap items-start gap-2 pb-1 h-full">
           {/* LANGUAGES USED */}
           {languages}
         </div>
