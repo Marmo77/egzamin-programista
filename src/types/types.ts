@@ -25,6 +25,26 @@ export type ExamType = {
   created_at?: string;
 };
 
+export type PracticeType = {
+  id: string;
+  name: string;
+  data: string;
+  subject: "inf03" | "inf04";
+  languages: string[];
+  pdf_link: string;
+  solution_link: string;
+  materials_link: string;
+  key_link: string;
+  created_at?: string;
+  kind: string[];
+};
+export type PracticeFilterOptions = {
+  subject: string;
+  languages: string;
+  sort: string;
+  year: string;
+};
+
 export type ReportType = {
   question_id: string;
   category: string;

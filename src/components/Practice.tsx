@@ -1,58 +1,57 @@
-// src/components/Practice.tsx
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { getFilteredExams } from "@/hooks/getExams";
-import type { ExamType } from "@/types/types";
-import PracticeCard from "./Practice/PracticeCard";
+import { getPracticeExams } from "@/hooks/getPracticeExams";
+import { type PracticeFilterOptions, type PracticeType } from "@/types/types";
+import { useEffect, useRef, useState } from "react";
+import PracticeCardNew from "./Practice/PracticeCard";
 import PracticeFilters from "./Practice/PracticeFilters";
-
-import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
+import { Button } from "./ui/button";
 import PaginationPractice from "./Practice/Pagination";
 
-export type FilterOptions = {
-  // search: string;
-  subject: string;
-  technologies: string;
-  sort: string;
-  year: string;
-};
-
 const Practice = () => {
-  const [allExams, setAllExams] = useState<ExamType[]>([]);
+  const [exams, setExams] = useState<PracticeType[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const limit = 9;
-  const [filters, setFilters] = useState<FilterOptions>({
+  const [filters, setFilters] = useState<PracticeFilterOptions>({
     // search: "",
     subject: "",
-    technologies: "",
+    languages: "",
     sort: "",
     year: "",
   });
 
-  // Track previous filters to detect changes
+  const handleFilterChange = (
+    key: keyof PracticeFilterOptions,
+    value: string
+  ) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [key]: value,
+    }));
+  };
+  const limit = 9;
+
   const prevFiltersRef = useRef<string>("");
-  // Memoize filter key to detect when filters actually change
-  // const filterKey = useMemo(() => JSON.stringify(filters), [filters]);
 
   useEffect(() => {
+    const filtersChanged = JSON.stringify(filters) !== prevFiltersRef.current;
+    prevFiltersRef.current = JSON.stringify(filters);
+
+    if (filtersChanged) {
+      setCurrentPage(1);
+    }
+
     const fetchExams = async () => {
-      const currentFilterKey = JSON.stringify(filters);
-      const filtersChanged = prevFiltersRef.current !== currentFilterKey;
-
-      if (filtersChanged) {
-        setCurrentPage(1); // Reset page on filter change
-        prevFiltersRef.current = currentFilterKey;
-      }
-
-      setIsLoading(true);
       try {
-        // Fetch ALL matching exams (no pagination on fetch)
-        const { data, count } = await getFilteredExams(filters, 1, 10000);
-        setAllExams(data);
+        const { data, count } = await getPracticeExams(
+          filters,
+          currentPage,
+          limit
+        );
+        setExams(data);
         setTotalCount(count);
+        console.log("Fetched exams:", data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -60,50 +59,23 @@ const Practice = () => {
       }
     };
     fetchExams();
-    // const timeoutId = setTimeout(
-    //   () => {
-    //     fetchExams();
-    //   },
-    //   filters.search.length > 0 && filters.search.length < 3 ? 0 : 500
-    // );
+  }, [filters, currentPage]);
 
-    // return () => clearTimeout(timeoutId);
-  }, [filters]); // Only depend on filters
+  const resetFilters = () => {
+    Object.keys(filters).forEach((key) => {
+      handleFilterChange(key as keyof PracticeFilterOptions, "");
+    });
+    setCurrentPage(1);
+  };
 
-  // Memoize current page exams
-  const currentExams = useMemo(() => {
-    const startIndex = (currentPage - 1) * limit;
-    const endIndex = startIndex + limit;
-    return allExams.slice(startIndex, endIndex);
-  }, [allExams, currentPage]);
-
-  const handleFilterChange = useCallback(
-    (key: keyof FilterOptions, value: string) => {
-      setFilters((prev) => ({
-        ...prev,
-        [key]: value,
-      }));
-    },
-    []
-  );
-
-  const handlePageChange = useCallback(
-    (page: number) => {
-      if (page < 1 || page > Math.ceil(totalCount / limit)) return;
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    },
-    [totalCount, limit]
-  );
-
-  // Redirect to work in progress
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/work-in-progress");
-  }, []);
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > Math.ceil(totalCount / limit)) return;
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8">
+    <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8 md:px-4">
       <div className="py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-semibold text-foreground mb-4">
@@ -114,13 +86,14 @@ const Practice = () => {
             kwalifikacji.
           </p>
         </div>
-
-        <PracticeFilters
-          filters={filters}
-          onFilterChange={handleFilterChange}
-        />
-
-        {!isLoading && totalCount > 0 && (
+        <div>
+          <PracticeFilters
+            filters={filters}
+            onFilterChange={handleFilterChange}
+            resetFilters={resetFilters}
+          />
+        </div>
+        {!isLoading && totalCount !== undefined && totalCount > 0 && (
           <div className="text-sm flex justify-end px-2 text-muted-foreground mb-4">
             Znaleziono {totalCount}{" "}
             {totalCount === 1
@@ -130,48 +103,46 @@ const Practice = () => {
               : "egzaminów"}
           </div>
         )}
-
         <PaginationPractice
           currentPage={currentPage}
+          handlePageChange={handlePageChange}
           totalExams={totalCount}
           limit={limit}
-          handlePageChange={handlePageChange}
         />
-
+        {!isLoading && totalCount == 0 && (
+          <div className="col-span-full text-center flex flex-col gap-3 items-center py-12 text-muted-foreground">
+            Nie znaleziono egzaminów spełniających kryteria wyszukiwania
+            <Button variant={"questionButton"} onClick={resetFilters}>
+              Resetuj filtry
+            </Button>
+          </div>
+        )}
         <div className="grid justify-center max-lg:grid-cols-2 max-md:grid-cols-1 grid-cols-3 gap-4">
-          {isLoading ? (
+          {isLoading && (
             <>
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
-              <PracticeSkeletonCard />
+              {Array.from({ length: 9 }).map((_, index) => (
+                <PracticeSkeletonCard key={index} />
+              ))}
             </>
-          ) : currentExams.length === 0 ? (
-            <div className="col-span-full text-center py-12 text-muted-foreground">
-              Nie znaleziono egzaminów spełniających kryteria wyszukiwania
-            </div>
-          ) : (
-            currentExams.map((exam) => (
-              <PracticeCard key={exam.id} exam={exam} />
-            ))
           )}
+          {!isLoading &&
+            exams.map((exam) => <PracticeCardNew key={exam.id} exam={exam} />)}
         </div>
-
-        <PaginationPractice
-          currentPage={currentPage}
-          totalExams={totalCount}
-          limit={limit}
-          handlePageChange={handlePageChange}
-        />
+        {!isLoading && totalCount !== undefined && totalCount > 0 && (
+          <div className="pt-4">
+            <PaginationPractice
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              totalExams={totalCount}
+              limit={limit}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
 };
+
 const PracticeSkeletonCard = () => {
   return (
     <Card className="w-full">
@@ -203,4 +174,5 @@ const PracticeSkeletonCard = () => {
     </Card>
   );
 };
+
 export default Practice;

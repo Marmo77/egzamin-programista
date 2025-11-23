@@ -10,14 +10,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import type { FilterOptions } from "../Practice";
+import type { PracticeFilterOptions } from "@/types/types";
+import { Button } from "../ui/button";
+import { RefreshCw } from "lucide-react";
 
 interface PracticeFiltersProps {
-  filters: FilterOptions;
-  onFilterChange: (key: keyof FilterOptions, value: string) => void;
+  filters: PracticeFilterOptions;
+  onFilterChange: (key: keyof PracticeFilterOptions, value: string) => void;
+  resetFilters: () => void;
 }
 
-const PracticeFilters = ({ filters, onFilterChange }: PracticeFiltersProps) => {
+const PracticeFilters = ({
+  filters,
+  onFilterChange,
+  resetFilters,
+}: PracticeFiltersProps) => {
   return (
     <Card className="my-4">
       <CardContent className="px-6">
@@ -59,8 +66,8 @@ const PracticeFilters = ({ filters, onFilterChange }: PracticeFiltersProps) => {
             {/* JĘZYK PROGRAMOWANIA */}
             <div className="flex-1 min-w-[180px] max-lg:w-full">
               <Select
-                value={filters.technologies}
-                onValueChange={(value) => onFilterChange("technologies", value)}
+                value={filters.languages}
+                onValueChange={(value) => onFilterChange("languages", value)}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Wybierz język programowania" />
@@ -112,6 +119,7 @@ const PracticeFilters = ({ filters, onFilterChange }: PracticeFiltersProps) => {
                   <SelectGroup>
                     <SelectLabel>Rok</SelectLabel>
                     <SelectItem value="all">Wszystkie</SelectItem>
+                    <SelectItem value="2025">2025</SelectItem>
                     <SelectItem value="2024">2024</SelectItem>
                     <SelectItem value="2023">2023</SelectItem>
                     <SelectItem value="2022">2022</SelectItem>
@@ -122,6 +130,9 @@ const PracticeFilters = ({ filters, onFilterChange }: PracticeFiltersProps) => {
                 </SelectContent>
               </Select>
             </div>
+            <Button variant={"outline"} onClick={resetFilters}>
+              <RefreshCw />
+            </Button>
           </div>
         </section>
       </CardContent>

@@ -1,7 +1,7 @@
 import supabase from "@/utils/supabase";
 // src/hooks/getExams.ts
 import type { ExamType } from "@/types/types";
-import type { FilterOptions } from "@/components/Practice";
+import type { FilterOptions } from "@/components/PracticeOLD";
 
 // export const getExams = async () => {
 //   const { data, error } = await supabase
