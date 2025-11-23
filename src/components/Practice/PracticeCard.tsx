@@ -126,6 +126,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
               size="sm"
               variant={"actionButton"}
               className={`w-full select-none  ${ActiveLinks[0].Exams.text} ${ActiveLinks[0].Exams.border}`}
+              onClick={() => window.open(exam.pdf_link, "_blank")}
               disabled={exam.pdf_link === "" || exam.pdf_link === null}
             >
               <NotebookText className="w-4 h-4 mr-1" />
@@ -136,6 +137,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
               size="sm"
               variant="actionButton"
               className={`w-full select-none ${ActiveLinks[0].Solutions.text} ${ActiveLinks[0].Solutions.border}`}
+              onClick={() => window.open(exam.solution_link, "_blank")}
               disabled={
                 exam.solution_link === "" || exam.solution_link === null
               }
@@ -148,6 +150,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
               size="sm"
               variant="actionButton"
               className={`w-full select-none  ${ActiveLinks[0].ZIP.text} ${ActiveLinks[0].ZIP.border}`}
+              onClick={() => window.open(exam.materials_link, "_blank")}
               disabled={
                 exam.materials_link === "" || exam.materials_link === null
               }
@@ -158,6 +161,7 @@ const PracticeCard = memo(({ exam }: { exam: PracticeType }) => {
             <Button
               size="sm"
               variant="actionButton"
+              onClick={() => window.open(exam.key_link, "_blank")}
               className={`w-full select-none  ${ActiveLinks[0].Rules.text} ${ActiveLinks[0].Rules.border}`}
               disabled={exam.key_link === "" || exam.key_link === null}
             >

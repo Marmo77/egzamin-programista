@@ -75,7 +75,7 @@ const Practice = () => {
   };
 
   return (
-    <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8">
+    <section className="flex flex-col max-w-6xl mx-auto min-h-screen max-lg:px-8 md:px-4">
       <div className="py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-semibold text-foreground mb-4">
