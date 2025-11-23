@@ -12,20 +12,19 @@ import {
 } from "../ui/select";
 import type { PracticeFilterOptions } from "@/types/types";
 import { Button } from "../ui/button";
-import { Recycle, RefreshCw } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 
 interface PracticeFiltersProps {
   filters: PracticeFilterOptions;
   onFilterChange: (key: keyof PracticeFilterOptions, value: string) => void;
+  resetFilters: () => void;
 }
 
-const PracticeFilters = ({ filters, onFilterChange }: PracticeFiltersProps) => {
-  const resetFilters = () => {
-    const reset = filters as PracticeFilterOptions;
-    Object.keys(reset).forEach((key) => {
-      onFilterChange(key as keyof PracticeFilterOptions, "");
-    });
-  };
+const PracticeFilters = ({
+  filters,
+  onFilterChange,
+  resetFilters,
+}: PracticeFiltersProps) => {
   return (
     <Card className="my-4">
       <CardContent className="px-6">
