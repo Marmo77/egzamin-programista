@@ -53,6 +53,16 @@ const PrivacyPolicy = () => {
       ],
     },
     {
+      icon: Database,
+      title: "Arkusze",
+      content: [
+        {
+          type: "text",
+          text: "W niektórych materiałach (szczególnie praktyczne egzmainy INF.03) udostępniamy linki prowadzące do zasobów zewnętrznych, m.in. stron i plików autorstwa ee-informatyk.pl. Jesteśmy tylko pośrednikiem. Linki te mają charakter wyłącznie informacyjny i nie są własnością ani częścią naszej witryny. Nie ponosimy odpowiedzialności za treści, aktualność, zgodność z prawem ani działanie materiałów znajdujących się pod tymi zewnętrznymi adresami. Korzystanie z nich odbywa się na własną odpowiedzialność użytkownika.",
+        },
+      ],
+    },
+    {
       icon: Eye,
       title: "Analityka",
       content: [
