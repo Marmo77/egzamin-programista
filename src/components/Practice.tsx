@@ -1,12 +1,12 @@
 import { getPracticeExams } from "@/hooks/getPracticeExams";
 import { type PracticeFilterOptions, type PracticeType } from "@/types/types";
 import { useEffect, useRef, useState } from "react";
-import PracticeCardNew from "./Practice/PracticeCard";
 import PracticeFilters from "./Practice/PracticeFilters";
 import { Card, CardContent } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
 import PaginationPractice from "./Practice/Pagination";
+import PracticeCard from "./Practice/PracticeCard";
 
 const Practice = () => {
   const [exams, setExams] = useState<PracticeType[]>([]);
@@ -126,7 +126,7 @@ const Practice = () => {
             </>
           )}
           {!isLoading &&
-            exams.map((exam) => <PracticeCardNew key={exam.id} exam={exam} />)}
+            exams.map((exam) => <PracticeCard key={exam.id} exam={exam} />)}
         </div>
         {!isLoading && totalCount !== undefined && totalCount > 0 && (
           <div className="pt-4">
