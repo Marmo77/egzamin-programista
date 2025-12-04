@@ -116,13 +116,15 @@ Platforma wspiera tryb ciemny, który jest łagodniejszy dla oczu podczas długi
 
 <div id="feature-practice">
 
-### 📄 Arkusze Praktyczne *(W przygotowaniu)*
+### 📄 Arkusze Praktyczne 
+<img src="public/readme-images/practice-screen.jpg" alt="Praktyka" width="700px">
 
-W przyszłości dostępne będą:
+dostępne są:
 - Kompletne arkusze egzaminacyjne z poprzednich lat
 - Pliki do pobrania (ZIP)
 - Rozwiązania przykładowe
 - Zasady oceniania
+- I więcej
 
 </div>
 
